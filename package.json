@@ -30,6 +30,8 @@
   "eslintConfig": {
     "root": true,
     "env": {
+      "es6": true,
+      "browser": true,
       "node": true
     },
     "extends": [
@@ -39,7 +41,17 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+        "eqeqeq": "off",
+        "curly": "error",
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "semi": [
+            "error"
+        ]
+    }
   },
   "browserslist": [
     "> 1%",

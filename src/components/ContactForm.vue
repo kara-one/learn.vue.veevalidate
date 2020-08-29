@@ -199,8 +199,9 @@
     </div>
 </template>
 <script>
-import { COUNTRIES } from '@/helpers/exports';
-import { contactMixin } from '@/mixins/contactMixin';
+import { COUNTRIES } from '~@/helpers/exports';
+import { contactMixin } from '~@/mixins/contactMixin';
+
 export default {
     name: 'ContactForm',
     mixins: [contactMixin],
