@@ -1,8 +1,8 @@
-import ContactFormPage from '../views/ContactFormPage.vue'
-import HomePage from '../views/HomePage.vue'
-import Router from 'vue-router'
-import Vue from 'vue'
-Vue.use(Router)
+import ContactFormPage from '../views/ContactFormPage.vue';
+import HomePage from '../views/HomePage.vue';
+import Router from 'vue-router';
+import Vue from 'vue';
+Vue.use(Router);
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -18,4 +18,4 @@ export default new Router({
       component: ContactFormPage,
     },
   ],
-})
+});

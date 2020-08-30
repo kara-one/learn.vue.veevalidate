@@ -63,8 +63,8 @@
     </div>
 </template>
 <script>
-import { contactMixin } from '@/mixins/contactMixin'
-import ContactForm from '@/components/ContactForm.vue'
+import { contactMixin } from '@/mixins/contactMixin';
+import ContactForm from '@/components/ContactForm.vue';
 export default {
   name: 'HomePage',
   mixins: [contactMixin],
@@ -77,37 +77,37 @@ export default {
   },
   computed: {
     contacts() {
-      return this.$store.state.contacts
+      return this.$store.state.contacts;
     },
   },
   data() {
     return {
       showDialog: false,
       selectedContactId: undefined,
-    }
+    };
   },
   beforeMount() {
-    this.getAllContacts()
+    this.getAllContacts();
   },
   methods: {
     async getAllContacts() {
       try {
-        const response = await this.getContacts()
-        this.$store.commit('setContacts', response.data)
+        const response = await this.getContacts();
+        this.$store.commit('setContacts', response.data);
       } catch (ex) {
-        console.log(ex)
+        console.log(ex);
       }
     },
     async removeContact(id) {
       try {
-        await this.deleteContact(id)
-        await this.getAllContacts()
+        await this.deleteContact(id);
+        await this.getAllContacts();
       } catch (ex) {
-        console.log(ex)
+        console.log(ex);
       }
     },
   },
-}
+};
 </script>
 <style scoped>
 .md-dialog-container {

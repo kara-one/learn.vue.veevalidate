@@ -33,7 +33,7 @@ export default {
   data: () => ({
     showNavigation: false,
   }),
-}
+};
 </script>
 
 <style lang="scss">
