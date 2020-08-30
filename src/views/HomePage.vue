@@ -63,51 +63,51 @@
     </div>
 </template>
 <script>
-import { contactMixin } from '@/mixins/contactMixin';
-import ContactForm from '@/components/ContactForm.vue';
+import { contactMixin } from '@/mixins/contactMixin'
+import ContactForm from '@/components/ContactForm.vue'
 export default {
-    name: 'HomePage',
-    mixins: [contactMixin],
-    components: {
-        ContactForm,
+  name: 'HomePage',
+  mixins: [contactMixin],
+  components: {
+    ContactForm,
+  },
+  props: {
+    editing: Boolean,
+    id: Number,
+  },
+  computed: {
+    contacts() {
+      return this.$store.state.contacts
     },
-    props: {
-        editing: Boolean,
-        id: Number,
+  },
+  data() {
+    return {
+      showDialog: false,
+      selectedContactId: undefined,
+    }
+  },
+  beforeMount() {
+    this.getAllContacts()
+  },
+  methods: {
+    async getAllContacts() {
+      try {
+        const response = await this.getContacts()
+        this.$store.commit('setContacts', response.data)
+      } catch (ex) {
+        console.log(ex)
+      }
     },
-    computed: {
-        contacts() {
-            return this.$store.state.contacts;
-        },
+    async removeContact(id) {
+      try {
+        await this.deleteContact(id)
+        await this.getAllContacts()
+      } catch (ex) {
+        console.log(ex)
+      }
     },
-    data() {
-        return {
-            showDialog: false,
-            selectedContactId: undefined,
-        };
-    },
-    beforeMount() {
-        this.getAllContacts();
-    },
-    methods: {
-        async getAllContacts() {
-            try {
-                const response = await this.getContacts();
-                this.$store.commit('setContacts', response.data);
-            } catch (ex) {
-                console.log(ex);
-            }
-        },
-        async removeContact(id) {
-            try {
-                await this.deleteContact(id);
-                await this.getAllContacts();
-            } catch (ex) {
-                console.log(ex);
-            }
-        },
-    },
-};
+  },
+}
 </script>
 <style scoped>
 .md-dialog-container {

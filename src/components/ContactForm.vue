@@ -199,81 +199,81 @@
     </div>
 </template>
 <script>
-import { COUNTRIES } from '~@/helpers/exports';
-import { contactMixin } from '~@/mixins/contactMixin';
+import { COUNTRIES } from '@/helpers/export'
+import { contactMixin } from '@/mixins/contactMixin'
 
 export default {
-    name: 'ContactForm',
-    mixins: [contactMixin],
-    props: {
-        editing: Boolean,
-        contactId: Number,
+  name: 'ContactForm',
+  mixins: [contactMixin],
+  props: {
+    editing: Boolean,
+    contactId: Number,
+  },
+  computed: {
+    isFormDirty() {
+      return Object.keys(this.fields).some(
+        (key) => this.fields[key].dirty,
+      )
     },
-    computed: {
-        isFormDirty() {
-            return Object.keys(this.fields).some(
-                (key) => this.fields[key].dirty
-            );
-        },
-        contacts() {
-            return this.$store.state.contacts;
-        },
+    contacts() {
+      return this.$store.state.contacts
     },
-    data() {
-        return {
-            sending: false,
-            contact: {},
-            countries: COUNTRIES.map((c) => c.name),
-        };
+  },
+  data() {
+    return {
+      sending: false,
+      contact: {},
+      countries: COUNTRIES.map((c) => c.name),
+    }
+  },
+  beforeMount() {
+    this.contact = this.contacts.find((c) => c.id == this.contactId) || {}
+  },
+  methods: {
+    async save(evt) {
+      evt.preventDefault()
+      try {
+        const result = await this.$validator.validateAll()
+        if (!result) {
+          return
+        }
+        if (this.editing) {
+          await this.updateContact(this.contact, this.contactId)
+          await this.getAllContacts()
+          this.$emit('contactSaved')
+        } else {
+          await this.addContact(this.contact)
+          await this.getAllContacts()
+          this.$router.push('/')
+        }
+      } catch (ex) {
+        console.log(ex)
+      }
     },
-    beforeMount() {
-        this.contact = this.contacts.find((c) => c.id == this.contactId) || {};
+    async getAllContacts() {
+      try {
+        const response = await this.getContacts()
+        this.$store.commit('setContacts', response.data)
+      } catch (ex) {
+        console.log(ex)
+      }
     },
-    methods: {
-        async save(evt) {
-            evt.preventDefault();
-            try {
-                const result = await this.$validator.validateAll();
-                if (!result) {
-                    return;
-                }
-                if (this.editing) {
-                    await this.updateContact(this.contact, this.contactId);
-                    await this.getAllContacts();
-                    this.$emit('contactSaved');
-                } else {
-                    await this.addContact(this.contact);
-                    await this.getAllContacts();
-                    this.$router.push('/');
-                }
-            } catch (ex) {
-                console.log(ex);
-            }
-        },
-        async getAllContacts() {
-            try {
-                const response = await this.getContacts();
-                this.$store.commit('setContacts', response.data);
-            } catch (ex) {
-                console.log(ex);
-            }
-        },
-        getPostalCodeRegex() {
-            if (this.contact.country == 'United States') {
-                return /^[0-9]{5}(?:-[0-9]{4})?$/;
-            } else if (this.contact.country == 'Canada') {
-                return /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/;
-            }
-            return /./;
-        },
-        getPhoneRegex() {
-            if (['United States', 'Canada'].includes(this.contact.country)) {
-                return /^[2-9]\d{2}[2-9]\d{2}\d{4}$/;
-            }
-            return /./;
-        },
+    getPostalCodeRegex() {
+      if (this.contact.country == 'United States') {
+        return /^[0-9]{5}(?:-[0-9]{4})?$/
+      } if (this.contact.country == 'Canada') {
+        return /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/
+      }
+      return /./
     },
-};
+    getPhoneRegex() {
+      if (['United States', 'Canada'].includes(this.contact.country)) {
+        return /^[2-9]\d{2}[2-9]\d{2}\d{4}$/
+      }
+      return /./
+    },
+  },
+}
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
