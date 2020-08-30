@@ -30,8 +30,9 @@ module.exports = {
       'single'
     ],
     'semi': [
-      'error'
+      2, 'always'
     ],
+    'no-extra-semi': 'off',
     'indent': ['error', 2]
   },
 };
