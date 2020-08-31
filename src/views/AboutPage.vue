@@ -14,9 +14,12 @@
           <span class="md-title">Used technology:</span>
         </md-toolbar>
         <md-toolbar :md-elevation="1">
-          <span class="md-subheading">vue.js, vee-validate, vue-material, vue-router, vuex, axios, json-server</span>
+          <span
+            class="md-subheading"
+          >vue-cli, vee-validate, vue-material, vue-router, vuex, axios, json-server</span>
         </md-toolbar>
       </div>
+
       <br />
       <div class="viewport">
         <md-toolbar :md-elevation="1">
@@ -26,6 +29,7 @@
           <span class="md-subheading">Migrate to vue-material 3.3.9</span>
         </md-toolbar>
       </div>
+
       <br />
       <div class="viewport">
         <md-toolbar :md-elevation="1">
@@ -44,14 +48,44 @@
           <md-list-item>
             <md-icon>backup</md-icon>
             <span class="md-list-item-text">
-              <a href>Local-mirror of article</a>
+              <a href="https://ksawl.github.io/learn.vue.veevalidate/">Local-mirror of article</a>
             </span>
           </md-list-item>
           <md-list-item>
             <md-icon>move_to_inbox</md-icon>
             <span class="md-list-item-text">
-              <a href>Source-code on GitHub</a>
+              <a href="https://github.com/ksawl/learn.vue.veevalidate">Source-code on GitHub</a>
             </span>
+          </md-list-item>
+        </md-list>
+      </div>
+
+      <br />
+      <div class="viewport">
+        <md-toolbar :md-elevation="1">
+          <span class="md-title">Start project view:</span>
+        </md-toolbar>
+
+        <md-list>
+          <md-list-item>
+            <md-subheader>Project setup</md-subheader>
+            <span class="md-list-item-text">npm install</span>
+          </md-list-item>
+          <md-list-item>
+            <md-subheader>Compiles and hot-reloads for development</md-subheader>
+            <span class="md-list-item-text">npm run serve</span>
+          </md-list-item>
+          <md-list-item>
+            <md-subheader>Compiles and minifies for production</md-subheader>
+            <span class="md-list-item-text">npm run build</span>
+          </md-list-item>
+          <md-list-item>
+            <md-subheader>Lints and fixes files</md-subheader>
+            <span class="md-list-item-text">npm run lint</span>
+          </md-list-item>
+          <md-list-item>
+            <md-subheader>Run json-server</md-subheader>
+            <span class="md-list-item-text">npm run rest</span>
           </md-list-item>
         </md-list>
       </div>
