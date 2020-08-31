@@ -5,14 +5,16 @@ I was looking for a beautiful solution for data exchange with REST via axios and
 
 # Used technology:
 ```
-vue.js, vee-validate, vue-material, vue-router, vuex, axios, json-server
+vue-cli, vee-validate, vue-material, vue-router, vuex, axios, json-server
 ```
 # Update:
 Migrate to vue-material 3.3.9
 
 # Links:
 Original article: https://medium.com/swlh/how-to-use-async-and-await-with-vue-js-apps-33132aa0838b
+
 Local-mirror of article: https://ksawl.github.io/learn.vue.veevalidate/
+
 Source-code on GitHub: https://github.com/ksawl/learn.vue.veevalidate
 
 ## Project setup
