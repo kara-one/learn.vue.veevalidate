@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Use Async and Await with Vue.js Apps</title>
+</head>
+
+<body>
+
+    <section class="fm fn fo fp fq">
+        <div class="n p">
+            <div class="z ab ac ae af fr ah ai">
+                <div>
+                    <h1 id="c4d7" class="fs ft as fu b fv fw fx fy fz ga gb gc gd ge gf gg gh gi gj gk eh">How to
+                        Use Async and Await with Vue.js Apps</h1>
+                    <div class="gl">
+                        <div class="n ed gm gn go">
+                            <div class="o n">
+                                <div><a rel="noopener"
+                                        href="/@hohanga?source=post_page-----33132aa0838b----------------------"><img
+                                            alt="John Au-Yeung" class="r gp gq gr"
+                                            src="https://miro.medium.com/fit/c/96/96/2*FG4lpTG6MxKsIj_BBTqwRg.jpeg"
+                                            width="48" height="48"></a></div>
+                                <div class="gs ai r">
+                                    <div class="n">
+                                        <div style="flex:1"><span class="ar b as at au av r eh q">
+                                                <div class="gt n o gu"><span class="ar cl gv at br gw gx gy gz ha eh"><a
+                                                            class="cq cr ba bb bc bd be bf bg bh hb bk em en"
+                                                            rel="noopener"
+                                                            href="/@hohanga?source=post_page-----33132aa0838b----------------------">John
+                                                            Au-Yeung</a></span>
+                                                    <div class="ev r ao h"><span><button
+                                                                class="ar cl cm at eh hc q hd he hf hg hh bh em hi hj hk hl hm hn ho hp hq do hr hs">Follow</button></span>
+                                                    </div>
+                                                </div>
+                                            </span></div>
+                                    </div><span class="ar b as at au av r aw ax"><span
+                                            class="ar cl gv at br gw gx gy gz ha aw">
+                                            <div><a class="cq cr ba bb bc bd be bf bg bh hb bk em en" rel="noopener"
+                                                    href="/swlh/how-to-use-async-and-await-with-vue-js-apps-33132aa0838b?source=post_page-----33132aa0838b----------------------">Sep
+                                                    15, 2019</a> <!-- -->·
+                                                <!-- -->
+                                                <!-- -->19
+                                                <!-- --> min read<span style="padding-left:4px"><svg
+                                                        class="star-15px_svg__svgIcon-use" width="15" height="15"
+                                                        viewBox="0 0 15 15" style="margin-top:-2px">
+                                                        <path
+                                                            d="M7.44 2.32c.03-.1.09-.1.12 0l1.2 3.53a.29.29 0 0 0 .26.2h3.88c.11 0 .13.04.04.1L9.8 8.33a.27.27 0 0 0-.1.29l1.2 3.53c.03.1-.01.13-.1.07l-3.14-2.18a.3.3 0 0 0-.32 0L4.2 12.22c-.1.06-.14.03-.1-.07l1.2-3.53a.27.27 0 0 0-.1-.3L2.06 6.16c-.1-.06-.07-.12.03-.12h3.89a.29.29 0 0 0 .26-.19l1.2-3.52z">
+                                                        </path>
+                                                    </svg></span></div>
+                                        </span></span>
+                                </div>
+                            </div>
+                            <div class="n ht hu hv hw hx hy hz ia y">
+                                <div class="n o">
+                                    <div class="ib r ao"><button
+                                            class="cq cr ba bb bc bd be bf bg bh ek el bk em en"><svg width="29"
+                                                height="29" class="ax">
+                                                <path
+                                                    d="M22.05 7.54a4.47 4.47 0 0 0-3.3-1.46 4.53 4.53 0 0 0-4.53 4.53c0 .35.04.7.08 1.05A12.9 12.9 0 0 1 5 6.89a5.1 5.1 0 0 0-.65 2.26c.03 1.6.83 2.99 2.02 3.79a4.3 4.3 0 0 1-2.02-.57v.08a4.55 4.55 0 0 0 3.63 4.44c-.4.08-.8.13-1.21.16l-.81-.08a4.54 4.54 0 0 0 4.2 3.15 9.56 9.56 0 0 1-5.66 1.94l-1.05-.08c2 1.27 4.38 2.02 6.94 2.02 8.3 0 12.86-6.9 12.84-12.85.02-.24 0-.43 0-.65a8.68 8.68 0 0 0 2.26-2.34c-.82.38-1.7.62-2.6.72a4.37 4.37 0 0 0 1.95-2.51c-.84.53-1.81.9-2.83 1.13z">
+                                                </path>
+                                            </svg></button></div>
+                                    <div class="ib r ao"><button
+                                            class="cq cr ba bb bc bd be bf bg bh ek el bk em en"><svg width="29"
+                                                height="29" viewBox="0 0 29 29" fill="none" class="ax">
+                                                <path
+                                                    d="M5 6.36C5 5.61 5.63 5 6.4 5h16.2c.77 0 1.4.61 1.4 1.36v16.28c0 .75-.63 1.36-1.4 1.36H6.4c-.77 0-1.4-.6-1.4-1.36V6.36z">
+                                                </path>
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M10.76 20.9v-8.57H7.89v8.58h2.87zm-1.44-9.75c1 0 1.63-.65 1.63-1.48-.02-.84-.62-1.48-1.6-1.48-.99 0-1.63.64-1.63 1.48 0 .83.62 1.48 1.59 1.48h.01zM12.35 20.9h2.87v-4.79c0-.25.02-.5.1-.7.2-.5.67-1.04 1.46-1.04 1.04 0 1.46.8 1.46 1.95v4.59h2.87v-4.92c0-2.64-1.42-3.87-3.3-3.87-1.55 0-2.23.86-2.61 1.45h.02v-1.24h-2.87c.04.8 0 8.58 0 8.58z"
+                                                    fill="#fff"></path>
+                                            </svg></button></div>
+                                    <div class="ib r ao"><button
+                                            class="cq cr ba bb bc bd be bf bg bh ek el bk em en"><svg width="29"
+                                                height="29" class="ax">
+                                                <path
+                                                    d="M23.2 5H5.8a.8.8 0 0 0-.8.8V23.2c0 .44.35.8.8.8h9.3v-7.13h-2.38V13.9h2.38v-2.38c0-2.45 1.55-3.66 3.74-3.66 1.05 0 1.95.08 2.2.11v2.57h-1.5c-1.2 0-1.48.57-1.48 1.4v1.96h2.97l-.6 2.97h-2.37l.05 7.12h5.1a.8.8 0 0 0 .79-.8V5.8a.8.8 0 0 0-.8-.79">
+                                                </path>
+                                            </svg></button></div>
+                                    <div class="ic r">
+                                        <div class="ax"><span><a
+                                                    href="https://medium.com/m/signin?actionUrl=%2F_%2Fbookmark%2Fp%2F33132aa0838b&amp;operation=register&amp;redirect=https%3A%2F%2Fmedium.com%2Fswlh%2Fhow-to-use-async-and-await-with-vue-js-apps-33132aa0838b&amp;source=post_actions_header--------------------------bookmark_header-"
+                                                    class="cq cr ba bb bc bd be bf bg bh ek el bk em en"
+                                                    rel="noopener"><svg width="25" height="25" viewBox="0 0 25 25">
+                                                        <path
+                                                            d="M19 6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14.66h.01c.01.1.05.2.12.28a.5.5 0 0 0 .7.03l5.67-4.12 5.66 4.13a.5.5 0 0 0 .71-.03.5.5 0 0 0 .12-.29H19V6zm-6.84 9.97L7 19.64V6a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v13.64l-5.16-3.67a.49.49 0 0 0-.68 0z"
+                                                            fill-rule="evenodd"></path>
+                                                    </svg></a></span></div>
+                                    </div>
+                                    <div class="id r am"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p id="bcf8" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">Vue.js is a great framework for building front end web
+                    apps. It uses a component based architecture which makes organizing code easy. It
+                    allows you to use the latest features JavaScript has to offer which means writing
+                    code to build your apps is easy than ever. With latest versions of JavaScript
+                    (ES2017 or later), the <code class="eu jc jd je jf b">async</code> and <code
+                        class="eu jc jd je jf b">await</code> keywords are introduced. It is a shorthand
+                    for chaining promises, equivalent to calling a chain of <code class="eu jc jd je jf b">then</code>
+                    functions and
+                    returning a promise in each
+                    of the callbacks in the <code class="eu jc jd je jf b">then</code> function. For
+                    example:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="abaa" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">const asyncFunction = async () =&gt; {<br>  const promise1Result = await promsise1;<br>  console.log(promise1Result);<br>  const promise2Result = await promsise2;<br>  console.log(promise2Result);<br>}</span></pre>
+                <p id="1e9f" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">is the same as:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="c691" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">const asyncFunction = () =&gt; {<br>  promise1<br>  .then((promise1Result) =&gt; {<br>    console.log(promise1Result);<br>    return promise2<br>  })<br>  .then((promise2Result) =&gt; {<br>    console.log(promise2Result);<br>  })<br>}</span></pre>
+                <p id="b294" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">Notice that the first code block is much shorter than
+                    the second one. Each promise is called sequentially in both examples.</p>
+                <p id="c93a" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">This syntax is available to almost all modern browsers
+                    and can be made usable with Internet Explorer with transpilers like Babel. Vue.js
+                    uses Babel so we can use it in almost any browser including Internet Explorer.</p>
+                <p id="fa2c" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">In this story, we will build an address book app with
+                    Vue.js that uses Vee-Validate to validate our inputs. The form allows us to add and
+                    edit our contacts also we can get and delete contacts.</p>
+                <p id="ef58" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">To build our app, first we need to quickly set up a
+                    back end. To do this, we use a Node.js package called JSON Server to run our back
+                    end. The package’s documentation is located at <a href="https://github.com/typicode/json-server"
+                        class="cq hs js jt ju jv" target="_blank"
+                        rel="noopener nofollow">https://github.com/typicode/json-server</a>. Once this
+                    is running, it provides us with routes for us to save our contact entries from front
+                    end. To install the package, run:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="c3ff" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">npm install -g json-server</span></pre>
+                <p id="0399" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">We will run this later so we can save our contacts.</p>
+                <p id="0d88" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">Now we can start building our app. To do this, install
+                    the Vue CLI by running:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="d2fc" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">npm install -g @vue/cli</span></pre>
+                <p id="eb85" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">Then create the app by running:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="69c0" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">vue create vee-validate-address-book-app</span></pre>
+                <p id="473e" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph=""><code class="eu jc jd je jf b">vee-validate-address-book-app</code> is
+                    our app
+                    name.
+                    When running the wizard, be sure you choose to include Vuex and Vue Router as we
+                    will use it later. Next we have to install some libraries. We need a HTTP client, a
+                    Material Design library for making our app look good, and the Vee-Validate library.
+                    To do this, run <code class="eu jc jd je jf b">npm i axios vee-validate
+                        vue-material</code> . Axios is our HTTP client for communicating to back end.
+                    Vue Material is our Material Design library.</p>
+                <p id="a14e" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">Next we create our components that we nest in our page
+                    components. To do this, create a <code class="eu jc jd je jf b">components</code>
+                    folder in our project folder and within it, create a file called <code
+                        class="eu jc jd je jf b">ContactForm.vue</code> . In this file, we put:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="7135" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">&lt;template&gt;<br>  &lt;div class="contact-form"&gt;<br>    &lt;div class="center"&gt;<br>      &lt;h1&gt;{{editing ? 'Edit': 'Add'}} Contact&lt;/h1&gt;<br>    &lt;/div&gt;<br>    &lt;form novalidate class="md-layout" <a href="http://twitter.com/submit" class="cq hs js jt ju jv" target="_blank" rel="noopener nofollow">@submit</a>="save"&gt;<br>      &lt;md-field :class="{ 'md-invalid': errors.has('firstName') }"&gt;<br>        &lt;label for="firstName"&gt;First Name&lt;/label&gt;<br>        &lt;md-input<br>          name="firstName"<br>          v-model="contact.firstName"<br>          v-validate="'required'"<br>          :disabled="sending"<br>        /&gt;<br>        &lt;span class="md-error" v-if="errors.has('firstName')"&gt;First Name is required.&lt;/span&gt;<br>      &lt;/md-field&gt;</span><span id="1713" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;br /&gt;</span><span id="6008" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;md-field :class="{ 'md-invalid': errors.has('lastName') }"&gt;<br>        &lt;label for="lastName"&gt;Last Name&lt;/label&gt;<br>        &lt;md-input<br>          name="lastName"<br>          v-model="contact.lastName"<br>          :disabled="sending"<br>          v-validate="'required'"<br>        /&gt;<br>        &lt;span class="md-error" v-if="errors.has('lastName')"&gt;Last Name is required.&lt;/span&gt;<br>      &lt;/md-field&gt;</span><span id="2c40" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;br /&gt;</span><span id="7414" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;md-field :class="{ 'md-invalid': errors.has('addressLineOne') }"&gt;<br>        &lt;label for="addressLineOne"&gt;Address Line 1&lt;/label&gt;<br>        &lt;md-input<br>          name="addressLineOne"<br>          v-model="contact.addressLineOne"<br>          :disabled="sending"<br>          v-validate="'required'"<br>        /&gt;<br>        &lt;span class="md-error" v-if="errors.has('addressLineOne')"&gt;Address line 1 is required.&lt;/span&gt;<br>      &lt;/md-field&gt;</span><span id="09af" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;br /&gt;</span><span id="c81a" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;md-field :class="{ 'md-invalid': errors.has('addressLineTwo') }"&gt;<br>        &lt;label for="addressLineTwo"&gt;Address Line 2&lt;/label&gt;<br>        &lt;md-input name="addressLineTwo" v-model="contact.addressLineTwo" :disabled="sending" /&gt;<br>        &lt;span class="md-error" v-if="errors.has('addressLineTwo')"&gt;Address line 2 is required&lt;/span&gt;<br>      &lt;/md-field&gt;</span><span id="ec07" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;br /&gt;</span><span id="ad10" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;md-field :class="{ 'md-invalid': errors.has('city') }"&gt;<br>        &lt;label for="city"&gt;City&lt;/label&gt;<br>        &lt;md-input name="city" v-model="contact.city" :disabled="sending" v-validate="'required'" /&gt;<br>        &lt;span class="md-error" v-if="errors.has('city')"&gt;City is required.&lt;/span&gt;<br>      &lt;/md-field&gt;</span><span id="e8d2" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;br /&gt;</span><span id="dad7" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;md-field :class="{ 'md-invalid': errors.has('country') }"&gt;<br>        &lt;label for="country"&gt;Country&lt;/label&gt;<br>        &lt;md-select<br>          name="country"<br>          v-model="contact.country"<br>          md-dense<br>          :disabled="sending"<br>          v-validate.continues="'required'"<br>        &gt;<br>          &lt;md-option :value="c" :key="c" v-for="c in countries"&gt;{{c}}&lt;/md-option&gt;<br>        &lt;/md-select&gt;<br>        &lt;span class="md-error" v-if="errors.firstByRule('country', 'required')"&gt;Country is required.&lt;/span&gt;<br>      &lt;/md-field&gt;</span><span id="aa8c" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;br /&gt;</span><span id="45e5" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;md-field :class="{ 'md-invalid': errors.has('postalCode') }"&gt;<br>        &lt;label for="postalCode"&gt;Postal Code&lt;/label&gt;<br>        &lt;md-input<br>          name="postalCode"<br>          v-model="contact.postalCode"<br>          :disabled="sending"<br>          v-validate="{ required: true, regex: getPostalCodeRegex() }"<br>        /&gt;<br>        &lt;span<br>          class="md-error"<br>          v-if="errors.firstByRule('postalCode', 'required')"<br>        &gt;Postal Code is required.&lt;/span&gt;<br>        &lt;span<br>          class="md-error"<br>          v-if="errors.firstByRule('postalCode', 'regex')"<br>        &gt;Postal Code is invalid.&lt;/span&gt;<br>      &lt;/md-field&gt;</span><span id="d0f3" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;br /&gt;</span><span id="759b" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;md-field :class="{ 'md-invalid': errors.has('phone') }"&gt;<br>        &lt;label for="phone"&gt;Phone&lt;/label&gt;<br>        &lt;md-input<br>          name="phone"<br>          v-model="contact.phone"<br>          :disabled="sending"<br>          v-validate="{ required: true, regex: getPhoneRegex() }"<br>        /&gt;<br>        &lt;span class="md-error" v-if="errors.firstByRule('phone', 'required')"&gt;Phone is required.&lt;/span&gt;<br>        &lt;span class="md-error" v-if="errors.firstByRule('phone', 'regex')"&gt;Phone is invalid.&lt;/span&gt;<br>      &lt;/md-field&gt;</span><span id="e7e8" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;br /&gt;</span><span id="0020" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;md-field :class="{ 'md-invalid': errors.has('gender') }"&gt;<br>        &lt;label for="gender"&gt;Gender&lt;/label&gt;<br>        &lt;md-select<br>          name="gender"<br>          v-model="contact.gender"<br>          md-dense<br>          :disabled="sending"<br>          v-validate.continues="'required'"<br>        &gt;<br>          &lt;md-option value="male"&gt;Male&lt;/md-option&gt;<br>          &lt;md-option value="female"&gt;Female&lt;/md-option&gt;<br>        &lt;/md-select&gt;<br>        &lt;span class="md-error" v-if="errors.firstByRule('gender', 'required')"&gt;Gender is required.&lt;/span&gt;<br>      &lt;/md-field&gt;</span><span id="6eeb" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;br /&gt;</span><span id="a833" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;md-field :class="{ 'md-invalid': errors.has('age') }"&gt;<br>        &lt;label for="age"&gt;Age&lt;/label&gt;<br>        &lt;md-input<br>          type="number"<br>          id="age"<br>          name="age"<br>          autocomplete="age"<br>          v-model="contact.age"<br>          :disabled="sending"<br>          v-validate="'required|between:0,200'"<br>        /&gt;<br>        &lt;span class="md-error" v-if="errors.firstByRule('age', 'required')"&gt;Age is required.&lt;/span&gt;<br>        &lt;span class="md-error" v-if="errors.firstByRule('age', 'between')"&gt;Age must be 0 and 200.&lt;/span&gt;<br>      &lt;/md-field&gt;</span><span id="833b" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;br /&gt;<br>      &lt;md-field :class="{ 'md-invalid': errors.has('email') }"&gt;<br>        &lt;label for="email"&gt;Email&lt;/label&gt;<br>        &lt;md-input<br>          type="email"<br>          name="email"<br>          autocomplete="email"<br>          v-model="contact.email"<br>          :disabled="sending"<br>          v-validate="'required|email'"<br>        /&gt;<br>        &lt;span class="md-error" v-if="errors.firstByRule('email', 'required')"&gt;Email is required.&lt;/span&gt;<br>        &lt;span class="md-error" v-if="errors.firstByRule('email', 'email')"&gt;Email is invalid.&lt;/span&gt;<br>      &lt;/md-field&gt;</span><span id="8e12" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;md-progress-bar md-mode="indeterminate" v-if="sending" /&gt;</span><span id="e195" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;md-button type="submit" class="md-raised"&gt;{{editing ? 'Edit':'Create'}} Contact&lt;/md-button&gt;<br>    &lt;/form&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;</span><span id="ecf2" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;script&gt;<br>import { COUNTRIES } from "@/helpers/exports";<br>import { contactMixin } from "@/mixins/contactMixin";</span><span id="9666" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">export default {<br>  name: "ContactForm",<br>  mixins: [contactMixin],<br>  props: {<br>    editing: Boolean,<br>    contactId: Number<br>  },<br>  computed: {<br>    isFormDirty() {<br>      return Object.keys(this.fields).some(key =&gt; this.fields[key].dirty);<br>    },<br>    contacts() {<br>      return this.$store.state.contacts;<br>    }<br>  },<br>  data() {<br>    return {<br>      sending: false,<br>      contact: {},<br>      countries: COUNTRIES.map(c =&gt; c.name)<br>    };<br>  },</span><span id="9137" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">  beforeMount() {<br>    this.contact = this.contacts.find(c =&gt; c.id == this.contactId) || {};<br>  },</span><span id="e041" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">  methods: {<br>    async save(evt) {<br>      evt.preventDefault();<br>      try {<br>        const result = await this.$validator.validateAll();<br>        if (!result) {<br>          return;<br>        }<br>        if (this.editing) {<br>          await this.updateContact(this.contact, this.contactId);<br>          await this.getAllContacts();<br>          this.$emit("contactSaved");<br>        } else {<br>          await this.addContact(this.contact);<br>          await this.getAllContacts();<br>          this.$router.push("/");<br>        }<br>      } catch (ex) {<br>        console.log(ex);<br>      }<br>    },</span><span id="aed5" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">    async getAllContacts() {<br>      try {<br>        const response = await this.getContacts();<br>        this.$store.commit("setContacts", response.data);<br>      } catch (ex) {<br>        console.log(ex);<br>      }<br>    },</span><span id="bc2f" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">getPostalCodeRegex() {<br>      if (this.contact.country == "United States") {<br>        return /^[0-9]{5}(?:-[0-9]{4})?$/;<br>      } else if (this.contact.country == "Canada") {<br>        return /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/;<br>      }<br>      return /./;<br>    },</span><span id="18f5" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">getPhoneRegex() {<br>      if (["United States", "Canada"].includes(this.contact.country)) {<br>        return /^[2-9]\d{2}[2-9]\d{2}\d{4}$/;<br>      }<br>      return /./;<br>    }<br>  }<br>};<br>&lt;/script&gt;</span><span id="e7b5" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;!-- Add "scoped" attribute to limit CSS to this component only --&gt;<br>&lt;style scoped lang="scss"&gt;<br>.contact-form {<br>  margin: 0 auto;<br>  width: 90%;<br>}<br>&lt;/style&gt;</span></pre>
+                <p id="2e0a" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">In the file above, we have the contact form for adding
+                    and updating contacts in our address book. It is where Vee-Validate is used the
+                    most. Notice that in most input controls within the <code class="eu jc jd je jf b">form</code> tag,
+                    we have
+                    the <code class="eu jc jd je jf b">v-validate</code> prop, this is where we specify what
+                    kind of input the control accepts. <code class="eu jc jd je jf b">required</code>
+                    means that the form field is required. <code class="eu jc jd je jf b">regex</code>
+                    means we validate against a specified regular expression. This allows for custom
+                    form validation where there is no built in rules for Vee Validate available, or when
+                    you need to validate the field differently depending on the value of another field.
+                    For example for phone number, we have this function:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="8578" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">getPhoneRegex() {<br>  if (["United States", "Canada"].includes(this.contact.country)){<br>    return /^[2-9]\d{2}[2-9]\d{2}\d{4}$/;<br>  }<br>  return /./;<br>}</span></pre>
+                <p id="a4a9" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">It allows us to validate the number to see if it
+                    matches the North American telephone format when we enter United States or Canada.
+                    Otherwise, we let people enter whatever they want.</p>
+                <p id="e1cf" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">Similar, for postal code, we have:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="7708" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">getPostalCodeRegex() {<br>  if (this.contact.country == "United States") {<br>    return /^[0-9]{5}(?:-[0-9]{4})?$/;<br>  } else if (this.contact.country == "Canada") {<br>    return /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/;<br>  }<br>  return /./;<br>}</span></pre>
+                <p id="503c" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">This allows us to check for US zip codes and Canadian
+                    postal codes.</p>
+                <p id="7e37" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">Notice is the file above we used the <code
+                        class="eu jc jd je jf b">async</code>
+                    and <code class="eu jc jd je jf b">await</code> syntax for
+                    chaining promises in this
+                    block:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="644c" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">try {<br>  const result = await this.$validator.validateAll();<br>    if (!result) {<br>      return;<br>    }<br>    if (this.editing) {<br>      await this.updateContact(this.contact, this.contactId);<br>      await this.getAllContacts();<br>      this.$emit("contactSaved");<br>    } else {<br>      await this.addContact(this.contact);<br>      await this.getAllContacts();<br>      this.$router.push("/");<br>    }<br>} catch (ex) {<br>   console.log(ex);<br>}</span></pre>
+                <p id="e7cb" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">We have at least 3 promises being called in any case,
+                    so using the old syntax, chaining promises would be much longer than this. Also, we
+                    can use <code class="eu jc jd je jf b">try...catch</code> block to catch errors
+                    instead of chaining the <code class="eu jc jd je jf b">catch</code> function with
+                    its own callback function passed in at the end. It is also much readable and while
+                    it looks like synchronous code, it is not. You cannot return anything at the end but
+                    a promise.</p>
+                <p id="bb5d" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">To display errors, we can check if errors exists for a
+                    form field, then display errors. For example, for first name, we have:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="e9dc" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">&lt;span class="md-error" v-if="errors.has('firstName')"&gt;First Name is required.&lt;/span&gt;</span></pre>
+                <p id="6b45" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph=""><code class="eu jc jd je jf b">errors.has(‘firstName’)</code> checks if
+                    the
+                    first name
+                    field meets the validation criteria that we specified. Since we’re checking if it’s
+                    filled in, there is only one possible error, so we can just display the only error
+                    when <code class="eu jc jd je jf b">errors.has(‘firstName’)</code> returns <code
+                        class="eu jc jd je jf b">true</code> . For something more complex like phone, we
+                    have:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="73e7" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">&lt;span class="md-error" v-if="errors.firstByRule('phone', 'required')"&gt;Phone is required.&lt;/span&gt;</span><span id="f2ed" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;span class="md-error" v-if="errors.firstByRule('phone', 'regex')"&gt;Phone is invalid.&lt;/span&gt;</span></pre>
+                <p id="17bc" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">This allows us to check for each validation rule
+                    separately. For the phone number field, we have to check if it’s filled in and if
+                    what’s filled in has a valid format. The <code class="eu jc jd je jf b">errors.firstByRule</code>
+                    function
+                    allows us to do
+                    that. <code class="eu jc jd je jf b">errors.firstByRule(‘phone’, ‘required’)</code>
+                    returns <code class="eu jc jd je jf b">true</code> if the field is not filled in and
+                    <code class="eu jc jd je jf b">false</code> otherwise. <code
+                        class="eu jc jd je jf b">errors.firstByRule(‘phone’, ‘regex’)</code> returns
+                    <code class="eu jc jd je jf b">true</code> is the phone number is filled in in an
+                    incorrect format and <code class="eu jc jd je jf b">false</code> otherwise.</p>
+                <p id="d0dc" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">Vee-Validate provides a <code
+                        class="eu jc jd je jf b">this.field</code>
+                    object to your component. So we can
+                    check if fields are dirty, which means if they have been manipulated or not, by
+                    adding:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="9bd8" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">Object.keys(this.fields).some(key =&gt; this.fields[key].dirty)</span></pre>
+                <p id="2b7c" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">Each property is a form field and each property of the
+                    <code class="eu jc jd je jf b">this.fields</code> object has a <code
+                        class="eu jc jd je jf b">dirty</code>
+                    property, so we can check if they fields
+                    are manipulated or not.</p>
+                <p id="d440" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">In the <code class="eu jc jd je jf b">save</code>
+                    function of the <code class="eu jc jd je jf b">methods</code> object, we have:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="10f4" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">async save(evt) {<br>  evt.preventDefault();<br>  try {<br>    const result = await this.$validator.validateAll();<br>    if (!result) {<br>      return;<br>    }<br>    if (this.editing) {<br>      await this.updateContact(this.contact, this.contactId);<br>      await this.getAllContacts();<br>      this.$emit("contactSaved");<br>    } else {<br>      await this.addContact(this.contact);<br>      await this.getAllContacts();<br>      this.$router.push("/");<br>    }<br>  } catch (ex) {<br>    console.log(ex);<br>  }<br>},</span></pre>
+                <p id="41d1" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">We need <code class="eu jc jd je jf b">evt.preventDefault()</code> to
+                    stop
+                    the form from
+                    submitting the normal way, i.e. without calling the Ajax code below. <code
+                        class="eu jc jd je jf b">this.$validator.validateAll()</code> validates the
+                    form. <code class="eu jc jd je jf b">this.$validator</code> is an object provided by
+                    Vee Validate. It returns a promise, so we need the function to be <code
+                        class="eu jc jd je jf b">async</code>
+                    and we need <code class="eu jc jd je jf b">await</code> before
+                    the function call. If <code class="eu jc jd je jf b">result</code> is falsy, the form validation
+                    failed,
+                    so
+                    we run <code class="eu jc jd je jf b">return</code> to stop the rest of the function
+                    from executing. Finally, if form fields are all valid, we can submit. Since this
+                    form is used for both adding and editing contacts, we have to check which action
+                    we’re doing. If we edit, then we call <code class="eu jc jd je jf b">await
+                        this.updateContact(this.contact, this.contactId);</code> to update our contact.
+                    Otherwise, we add contact so we call <code class="eu jc jd je jf b">await
+                        this.addContact(this.contact);</code> In either case, we call <code
+                        class="eu jc jd je jf b">await
+                        this.getAllContacts();</code> to refresh our
+                    contacts and put them in the store. If we are adding then we will redirect to the
+                    home page at the end by calling <code class="eu jc jd je jf b">this.$router.push(“/”);</code> .
+                    <code class="eu jc jd je jf b">this.updateContact</code> , <code
+                        class="eu jc jd je jf b">this.addContact</code> ,
+                    and <code class="eu jc jd je jf b">this.getAllContacts</code> are all from our <code
+                        class="eu jc jd je jf b">contactMixin</code> which we will write shortly. Notice
+                    that we use the <code class="eu jc jd je jf b">async</code> and <code
+                        class="eu jc jd je jf b">await</code>
+                    keywords for chaining promises again.</p>
+                <p id="33d0" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">Next we write some helper code. Create a folder called
+                    <code class="eu jc jd je jf b">helpers</code> and within it, make a file called
+                    <code class="eu jc jd je jf b">export.js</code> and put in the following:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="b818" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">export const COUNTRIES = [<br>    { "name": "Afghanistan", "code": "AF" },<br>    { "name": "Aland Islands", "code": "AX" },<br>    { "name": "Albania", "code": "AL" },<br>    { "name": "Algeria", "code": "DZ" },<br>    { "name": "American Samoa", "code": "AS" },<br>    { "name": "AndorrA", "code": "AD" },<br>    { "name": "Angola", "code": "AO" },<br>    { "name": "Anguilla", "code": "AI" },<br>    { "name": "Antarctica", "code": "AQ" },<br>    { "name": "Antigua and Barbuda", "code": "AG" },<br>    { "name": "Argentina", "code": "AR" },<br>    { "name": "Armenia", "code": "AM" },<br>    { "name": "Aruba", "code": "AW" },<br>    { "name": "Australia", "code": "AU" },<br>    { "name": "Austria", "code": "AT" },<br>    { "name": "Azerbaijan", "code": "AZ" },<br>    { "name": "Bahamas", "code": "BS" },<br>    { "name": "Bahrain", "code": "BH" },<br>    { "name": "Bangladesh", "code": "BD" },<br>    { "name": "Barbados", "code": "BB" },<br>    { "name": "Belarus", "code": "BY" },<br>    { "name": "Belgium", "code": "BE" },<br>    { "name": "Belize", "code": "BZ" },<br>    { "name": "Benin", "code": "BJ" },<br>    { "name": "Bermuda", "code": "BM" },<br>    { "name": "Bhutan", "code": "BT" },<br>    { "name": "Bolivia", "code": "BO" },<br>    { "name": "Bosnia and Herzegovina", "code": "BA" },<br>    { "name": "Botswana", "code": "BW" },<br>    { "name": "Bouvet Island", "code": "BV" },<br>    { "name": "Brazil", "code": "BR" },<br>    { "name": "British Indian Ocean Territory", "code": "IO" },<br>    { "name": "Brunei Darussalam", "code": "BN" },<br>    { "name": "Bulgaria", "code": "BG" },<br>    { "name": "Burkina Faso", "code": "BF" },<br>    { "name": "Burundi", "code": "BI" },<br>    { "name": "Cambodia", "code": "KH" },<br>    { "name": "Cameroon", "code": "CM" },<br>    { "name": "Canada", "code": "CA" },<br>    { "name": "Cape Verde", "code": "CV" },<br>    { "name": "Cayman Islands", "code": "KY" },<br>    { "name": "Central African Republic", "code": "CF" },<br>    { "name": "Chad", "code": "TD" },<br>    { "name": "Chile", "code": "CL" },<br>    { "name": "China", "code": "CN" },<br>    { "name": "Christmas Island", "code": "CX" },<br>    { "name": "Cocos (Keeling) Islands", "code": "CC" },<br>    { "name": "Colombia", "code": "CO" },<br>    { "name": "Comoros", "code": "KM" },<br>    { "name": "Congo", "code": "CG" },<br>    { "name": "Congo, The Democratic Republic of the", "code": "CD" },<br>    { "name": "Cook Islands", "code": "CK" },<br>    { "name": "Costa Rica", "code": "CR" },<br>    {<br>        "name": "Cote D\"Ivoire", "code": "CI"<br>    },<br>    { "name": "Croatia", "code": "HR" },<br>    { "name": "Cuba", "code": "CU" },<br>    { "name": "Cyprus", "code": "CY" },<br>    { "name": "Czech Republic", "code": "CZ" },<br>    { "name": "Denmark", "code": "DK" },<br>    { "name": "Djibouti", "code": "DJ" },<br>    { "name": "Dominica", "code": "DM" },<br>    { "name": "Dominican Republic", "code": "DO" },<br>    { "name": "Ecuador", "code": "EC" },<br>    { "name": "Egypt", "code": "EG" },<br>    { "name": "El Salvador", "code": "SV" },<br>    { "name": "Equatorial Guinea", "code": "GQ" },<br>    { "name": "Eritrea", "code": "ER" },<br>    { "name": "Estonia", "code": "EE" },<br>    { "name": "Ethiopia", "code": "ET" },<br>    { "name": "Falkland Islands (Malvinas)", "code": "FK" },<br>    { "name": "Faroe Islands", "code": "FO" },<br>    { "name": "Fiji", "code": "FJ" },<br>    { "name": "Finland", "code": "FI" },<br>    { "name": "France", "code": "FR" },<br>    { "name": "French Guiana", "code": "GF" },<br>    { "name": "French Polynesia", "code": "PF" },<br>    { "name": "French Southern Territories", "code": "TF" },<br>    { "name": "Gabon", "code": "GA" },<br>    { "name": "Gambia", "code": "GM" },<br>    { "name": "Georgia", "code": "GE" },<br>    { "name": "Germany", "code": "DE" },<br>    { "name": "Ghana", "code": "GH" },<br>    { "name": "Gibraltar", "code": "GI" },<br>    { "name": "Greece", "code": "GR" },<br>    { "name": "Greenland", "code": "GL" },<br>    { "name": "Grenada", "code": "GD" },<br>    { "name": "Guadeloupe", "code": "GP" },<br>    { "name": "Guam", "code": "GU" },<br>    { "name": "Guatemala", "code": "GT" },<br>    { "name": "Guernsey", "code": "GG" },<br>    { "name": "Guinea", "code": "GN" },<br>    { "name": "Guinea-Bissau", "code": "GW" },<br>    { "name": "Guyana", "code": "GY" },<br>    { "name": "Haiti", "code": "HT" },<br>    { "name": "Heard Island and Mcdonald Islands", "code": "HM" },<br>    { "name": "Holy See (Vatican City State)", "code": "VA" },<br>    { "name": "Honduras", "code": "HN" },<br>    { "name": "Hong Kong", "code": "HK" },<br>    { "name": "Hungary", "code": "HU" },<br>    { "name": "Iceland", "code": "IS" },<br>    { "name": "India", "code": "IN" },<br>    { "name": "Indonesia", "code": "ID" },<br>    { "name": "Iran, Islamic Republic Of", "code": "IR" },<br>    { "name": "Iraq", "code": "IQ" },<br>    { "name": "Ireland", "code": "IE" },<br>    { "name": "Isle of Man", "code": "IM" },<br>    { "name": "Israel", "code": "IL" },<br>    { "name": "Italy", "code": "IT" },<br>    { "name": "Jamaica", "code": "JM" },<br>    { "name": "Japan", "code": "JP" },<br>    { "name": "Jersey", "code": "JE" },<br>    { "name": "Jordan", "code": "JO" },<br>    { "name": "Kazakhstan", "code": "KZ" },<br>    { "name": "Kenya", "code": "KE" },<br>    { "name": "Kiribati", "code": "KI" },<br>    {<br>        "name": "Korea, Democratic People\"S Republic of", "code": "KP"<br>    },<br>    { "name": "Korea, Republic of", "code": "KR" },<br>    { "name": "Kuwait", "code": "KW" },<br>    { "name": "Kyrgyzstan", "code": "KG" },<br>    {<br>        "name": "Lao People\"S Democratic Republic", "code": "LA"<br>    },<br>    { "name": "Latvia", "code": "LV" },<br>    { "name": "Lebanon", "code": "LB" },<br>    { "name": "Lesotho", "code": "LS" },<br>    { "name": "Liberia", "code": "LR" },<br>    { "name": "Libyan Arab Jamahiriya", "code": "LY" },<br>    { "name": "Liechtenstein", "code": "LI" },<br>    { "name": "Lithuania", "code": "LT" },<br>    { "name": "Luxembourg", "code": "LU" },<br>    { "name": "Macao", "code": "MO" },<br>    { "name": "Macedonia, The Former Yugoslav Republic of", "code": "MK" },<br>    { "name": "Madagascar", "code": "MG" },<br>    { "name": "Malawi", "code": "MW" },<br>    { "name": "Malaysia", "code": "MY" },<br>    { "name": "Maldives", "code": "MV" },<br>    { "name": "Mali", "code": "ML" },<br>    { "name": "Malta", "code": "MT" },<br>    { "name": "Marshall Islands", "code": "MH" },<br>    { "name": "Martinique", "code": "MQ" },<br>    { "name": "Mauritania", "code": "MR" },<br>    { "name": "Mauritius", "code": "MU" },<br>    { "name": "Mayotte", "code": "YT" },<br>    { "name": "Mexico", "code": "MX" },<br>    { "name": "Micronesia, Federated States of", "code": "FM" },<br>    { "name": "Moldova, Republic of", "code": "MD" },<br>    { "name": "Monaco", "code": "MC" },<br>    { "name": "Mongolia", "code": "MN" },<br>    { "name": "Montenegro", "code": "ME" },<br>    { "name": "Montserrat", "code": "MS" },<br>    { "name": "Morocco", "code": "MA" },<br>    { "name": "Mozambique", "code": "MZ" },<br>    { "name": "Myanmar", "code": "MM" },<br>    { "name": "Namibia", "code": "NA" },<br>    { "name": "Nauru", "code": "NR" },<br>    { "name": "Nepal", "code": "NP" },<br>    { "name": "Netherlands", "code": "NL" },<br>    { "name": "Netherlands Antilles", "code": "AN" },<br>    { "name": "New Caledonia", "code": "NC" },<br>    { "name": "New Zealand", "code": "NZ" },<br>    { "name": "Nicaragua", "code": "NI" },<br>    { "name": "Niger", "code": "NE" },<br>    { "name": "Nigeria", "code": "NG" },<br>    { "name": "Niue", "code": "NU" },<br>    { "name": "Norfolk Island", "code": "NF" },<br>    { "name": "Northern Mariana Islands", "code": "MP" },<br>    { "name": "Norway", "code": "NO" },<br>    { "name": "Oman", "code": "OM" },<br>    { "name": "Pakistan", "code": "PK" },<br>    { "name": "Palau", "code": "PW" },<br>    { "name": "Palestinian Territory, Occupied", "code": "PS" },<br>    { "name": "Panama", "code": "PA" },<br>    { "name": "Papua New Guinea", "code": "PG" },<br>    { "name": "Paraguay", "code": "PY" },<br>    { "name": "Peru", "code": "PE" },<br>    { "name": "Philippines", "code": "PH" },<br>    { "name": "Pitcairn", "code": "PN" },<br>    { "name": "Poland", "code": "PL" },<br>    { "name": "Portugal", "code": "PT" },<br>    { "name": "Puerto Rico", "code": "PR" },<br>    { "name": "Qatar", "code": "QA" },<br>    { "name": "Reunion", "code": "RE" },<br>    { "name": "Romania", "code": "RO" },<br>    { "name": "Russian Federation", "code": "RU" },<br>    { "name": "RWANDA", "code": "RW" },<br>    { "name": "Saint Helena", "code": "SH" },<br>    { "name": "Saint Kitts and Nevis", "code": "KN" },<br>    { "name": "Saint Lucia", "code": "LC" },<br>    { "name": "Saint Pierre and Miquelon", "code": "PM" },<br>    { "name": "Saint Vincent and the Grenadines", "code": "VC" },<br>    { "name": "Samoa", "code": "WS" },<br>    { "name": "San Marino", "code": "SM" },<br>    { "name": "Sao Tome and Principe", "code": "ST" },<br>    { "name": "Saudi Arabia", "code": "SA" },<br>    { "name": "Senegal", "code": "SN" },<br>    { "name": "Serbia", "code": "RS" },<br>    { "name": "Seychelles", "code": "SC" },<br>    { "name": "Sierra Leone", "code": "SL" },<br>    { "name": "Singapore", "code": "SG" },<br>    { "name": "Slovakia", "code": "SK" },<br>    { "name": "Slovenia", "code": "SI" },<br>    { "name": "Solomon Islands", "code": "SB" },<br>    { "name": "Somalia", "code": "SO" },<br>    { "name": "South Africa", "code": "ZA" },<br>    { "name": "South Georgia and the South Sandwich Islands", "code": "GS" },<br>    { "name": "Spain", "code": "ES" },<br>    { "name": "Sri Lanka", "code": "LK" },<br>    { "name": "Sudan", "code": "SD" },<br>    { "name": "Suriname", "code": "SR" },<br>    { "name": "Svalbard and Jan Mayen", "code": "SJ" },<br>    { "name": "Swaziland", "code": "SZ" },<br>    { "name": "Sweden", "code": "SE" },<br>    { "name": "Switzerland", "code": "CH" },<br>    { "name": "Syrian Arab Republic", "code": "SY" },<br>    { "name": "Taiwan, Province of China", "code": "TW" },<br>    { "name": "Tajikistan", "code": "TJ" },<br>    { "name": "Tanzania, United Republic of", "code": "TZ" },<br>    { "name": "Thailand", "code": "TH" },<br>    { "name": "Timor-Leste", "code": "TL" },<br>    { "name": "Togo", "code": "TG" },<br>    { "name": "Tokelau", "code": "TK" },<br>    { "name": "Tonga", "code": "TO" },<br>    { "name": "Trinidad and Tobago", "code": "TT" },<br>    { "name": "Tunisia", "code": "TN" },<br>    { "name": "Turkey", "code": "TR" },<br>    { "name": "Turkmenistan", "code": "TM" },<br>    { "name": "Turks and Caicos Islands", "code": "TC" },<br>    { "name": "Tuvalu", "code": "TV" },<br>    { "name": "Uganda", "code": "UG" },<br>    { "name": "Ukraine", "code": "UA" },<br>    { "name": "United Arab Emirates", "code": "AE" },<br>    { "name": "United Kingdom", "code": "GB" },<br>    { "name": "United States", "code": "US" },<br>    { "name": "United States Minor Outlying Islands", "code": "UM" },<br>    { "name": "Uruguay", "code": "UY" },<br>    { "name": "Uzbekistan", "code": "UZ" },<br>    { "name": "Vanuatu", "code": "VU" },<br>    { "name": "Venezuela", "code": "VE" },<br>    { "name": "Viet Nam", "code": "VN" },<br>    { "name": "Virgin Islands, British", "code": "VG" },<br>    { "name": "Virgin Islands, U.S.", "code": "VI" },<br>    { "name": "Wallis and Futuna", "code": "WF" },<br>    { "name": "Western Sahara", "code": "EH" },<br>    { "name": "Yemen", "code": "YE" },<br>    { "name": "Zambia", "code": "ZM" },<br>    { "name": "Zimbabwe", "code": "ZW" }<br>]</span></pre>
+                <p id="a6db" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">This provides the countries that we reference in <code
+                        class="eu jc jd je jf b">ContactForm.vue</code> .</p>
+                <p id="3d13" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">Next we add our mixin to manipulate our contacts by
+                    communicating with our back end. We make a folder call <code class="eu jc jd je jf b">mixins</code>
+                    and
+                    create a file called <code class="eu jc jd je jf b">contactMixin.js</code> within it. In the file,
+                    we
+                    put:
+                </p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="a46a" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">const axios = require('axios');<br>const apiUrl = '<a href="http://localhost:3000'" class="cq hs js jt ju jv" target="_blank" rel="noopener nofollow">http://localhost:3000'</a>;</span><span id="7415" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">export const contactMixin = {<br>    methods: {<br>        getContacts() {<br>            return axios.get(`${apiUrl}/contacts`);<br>        },</span><span id="d9ee" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">addContact(data) {<br>            return axios.post(`${apiUrl}/contacts`, data);<br>        },</span><span id="e6ea" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">updateContact(data, id) {<br>            return axios.put(`${apiUrl}/contacts/${id}`, data);<br>        },</span><span id="ddc3" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">deleteContact(id) {<br>            return axios.delete(`${apiUrl}/contacts/${id}`);<br>        }<br>    }<br>}</span></pre>
+                <p id="d3fd" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">This will let us include our functions in the <code
+                        class="eu jc jd je jf b">methods</code> object of the component object we
+                    include or mixin with by putting it in the <code class="eu jc jd je jf b">mixins</code> array of our
+                    component object.</p>
+                <p id="501f" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">Next we add our pages. To do this, create a <code
+                        class="eu jc jd je jf b">views</code> folder if it doesn’t already exists and
+                    add <code class="eu jc jd je jf b">ContactFormPage.vue</code> . In there, put:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="8b0c" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">&lt;template&gt;<br>  &lt;div class="about"&gt;<br>    &lt;ContactForm :edit="false" /&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;</span><span id="8a0e" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;script&gt;<br>// @ is an alias to /src<br>import ContactForm from "@/components/ContactForm.vue";</span><span id="edc4" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">export default {<br>  name: "ContactFormPage",<br>  components: {<br>    ContactForm<br>  }<br>};<br>&lt;/script&gt;</span></pre>
+                <p id="3f19" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">This just displays the <code
+                        class="eu jc jd je jf b">ContactForm</code>
+                    component that we created. We set
+                    the <code class="eu jc jd je jf b">:edit</code> prop to <code class="eu jc jd je jf b">false</code>
+                    so
+                    that it’ll add our contact instead of
+                    editing.</p>
+                <p id="c299" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">Next we add our home page to display a list of
+                    contacts. In the <code class="eu jc jd je jf b">views</code> folder, we add a file
+                    called <code class="eu jc jd je jf b">Home.vue</code> if it doesn’t already exists.
+                    Then in there we put:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="96c8" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">&lt;template&gt;<br>  &lt;div class="home"&gt;<br>    &lt;div class="center"&gt;<br>      &lt;h1&gt;Address Book Home&lt;/h1&gt;<br>    &lt;/div&gt;<br>    &lt;md-table&gt;<br>      &lt;md-table-row&gt;<br>        &lt;md-table-head md-numeric&gt;ID&lt;/md-table-head&gt;<br>        &lt;md-table-head&gt;First Name&lt;/md-table-head&gt;<br>        &lt;md-table-head&gt;Last Name&lt;/md-table-head&gt;<br>        &lt;md-table-head&gt;Address Line 1&lt;/md-table-head&gt;<br>        &lt;md-table-head&gt;Address Line 2&lt;/md-table-head&gt;<br>        &lt;md-table-head&gt;City&lt;/md-table-head&gt;<br>        &lt;md-table-head&gt;Country&lt;/md-table-head&gt;<br>        &lt;md-table-head&gt;Postal Code&lt;/md-table-head&gt;<br>        &lt;md-table-head&gt;Gender&lt;/md-table-head&gt;<br>        &lt;md-table-head&gt;Age&lt;/md-table-head&gt;<br>        &lt;md-table-head&gt;Email&lt;/md-table-head&gt;<br>        &lt;md-table-head&gt;&lt;/md-table-head&gt;<br>        &lt;md-table-head&gt;&lt;/md-table-head&gt;<br>      &lt;/md-table-row&gt;</span><span id="9c5e" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;md-table-row v-for="c in contacts" :key="c.id"&gt;<br>        &lt;md-table-cell md-numeric&gt;{{c.id}}&lt;/md-table-cell&gt;<br>        &lt;md-table-cell&gt;{{c.firstName}}&lt;/md-table-cell&gt;<br>        &lt;md-table-cell&gt;{{c.lastName}}&lt;/md-table-cell&gt;<br>        &lt;md-table-cell&gt;{{c.addressLineOne}}&lt;/md-table-cell&gt;<br>        &lt;md-table-cell&gt;{{c.addressLineTwo}}&lt;/md-table-cell&gt;<br>        &lt;md-table-cell&gt;{{c.city}}&lt;/md-table-cell&gt;<br>        &lt;md-table-cell&gt;{{c.country}}&lt;/md-table-cell&gt;<br>        &lt;md-table-cell&gt;{{c.postalCode}}&lt;/md-table-cell&gt;<br>        &lt;md-table-cell&gt;{{c.gender}}&lt;/md-table-cell&gt;<br>        &lt;md-table-cell md-numeric&gt;{{c.age}}&lt;/md-table-cell&gt;<br>        &lt;md-table-cell&gt;{{c.email}}&lt;/md-table-cell&gt;<br>        &lt;md-table-cell&gt;<br>          &lt;md-button class="md-primary" <a href="http://twitter.com/click" class="cq hs js jt ju jv" target="_blank" rel="noopener nofollow">@click</a>="selectedContactId = c.id; showDialog = true"&gt;Edit&lt;/md-button&gt;<br>        &lt;/md-table-cell&gt;<br>        &lt;md-table-cell&gt;<br>          &lt;md-button class="md-accent" <a href="http://twitter.com/click" class="cq hs js jt ju jv" target="_blank" rel="noopener nofollow">@click</a>="removeContact(c.id)"&gt;Delete&lt;/md-button&gt;<br>        &lt;/md-table-cell&gt;<br>      &lt;/md-table-row&gt;<br>    &lt;/md-table&gt;</span><span id="da6c" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;md-dialog :md-active.sync="showDialog"&gt;<br>      &lt;md-dialog-content&gt;<br>        &lt;ContactForm<br>          :editing="true"<br>          :contactId="selectedContactId"<br>          <a href="http://twitter.com/contactSaved" class="cq hs js jt ju jv" target="_blank" rel="noopener nofollow">@contactSaved</a>="selectedContactId = undefined; showDialog = false"<br>        /&gt;<br>      &lt;/md-dialog-content&gt;<br>    &lt;/md-dialog&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;</span><span id="cc87" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;script&gt;<br>import { contactMixin } from "@/mixins/contactMixin";<br>import ContactForm from "@/components/ContactForm.vue";</span><span id="bb2c" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">export default {<br>  name: "HomePage",<br>  mixins: [contactMixin],<br>  components: {<br>    ContactForm<br>  },<br>  props: {<br>    editing: Boolean,<br>    id: Number<br>  },<br>  computed: {<br>    contacts() {<br>      return this.$store.state.contacts;<br>    }<br>  },<br>  data() {<br>    return {<br>      showDialog: false,<br>      selectedContactId: undefined<br>    };<br>  },</span><span id="fc4d" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">beforeMount() {<br>    this.getAllContacts();<br>  },</span><span id="585a" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">methods: {<br>    async getAllContacts() {<br>      try {<br>        const response = await this.getContacts();<br>        this.$store.commit("setContacts", response.data);<br>      } catch (ex) {<br>        console.log(ex);<br>      }<br>    },</span><span id="7c32" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">async removeContact(id) {<br>      try {<br>        await this.deleteContact(id);<br>        await this.getAllContacts();<br>      } catch (ex) {<br>        console.log(ex);<br>      }<br>    }<br>  }<br>};<br>&lt;/script&gt;</span><span id="3297" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;style scoped&gt;<br>.md-dialog-container {<br>  padding: 20px;<br>}</span><span id="62db" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">.md-content.md-table.md-theme-default {<br>  width: 95%;<br>  margin: 0 auto;<br>}<br>&lt;/style&gt;</span></pre>
+                <p id="2ec1" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">We get our contacts during page load by call the <code
+                        class="eu jc jd je jf b">this.getAllContacts</code> function in the <code
+                        class="eu jc jd je jf b">beforeMount</code> function. Notice that we have <code
+                        class="eu jc jd je jf b">this.getContacts</code> function from our mixin. Mixins
+                    allows us to reuse code. Code in our mixinx cannot have the same name as the
+                    functions in our <code class="eu jc jd je jf b">methods</code> objects in our
+                    components because mixin functions hooks straight into our <code
+                        class="eu jc jd je jf b">methods</code>
+                    since we exported an object with <code class="eu jc jd je jf b">methods</code> field in our Mixin
+                    code.</p>
+                <p id="e768" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">In <code class="eu jc jd je jf b">App.vue</code> , we
+                    add our menu and top bar by putting the following:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="b925" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">&lt;template&gt;<br>  &lt;div id="app"&gt;<br>    &lt;md-toolbar class="md-accent"&gt;<br>      &lt;md-button class="md-icon-button" <a href="http://twitter.com/click" class="cq hs js jt ju jv" target="_blank" rel="noopener nofollow">@click</a>="showNavigation = true"&gt;<br>        &lt;md-icon&gt;menu&lt;/md-icon&gt;<br>      &lt;/md-button&gt;<br>      &lt;h3 class="md-title"&gt;Vee Validate Address Book App&lt;/h3&gt;<br>    &lt;/md-toolbar&gt;<br>    &lt;md-drawer :md-active.sync="showNavigation" md-swipeable&gt;<br>      &lt;md-toolbar class="md-transparent" md-elevation="0"&gt;<br>        &lt;span class="md-title"&gt;Vee Validate Address Book App&lt;/span&gt;<br>      &lt;/md-toolbar&gt;</span><span id="662f" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;md-list&gt;<br>        &lt;md-list-item&gt;<br>          &lt;router-link to="/"&gt;<br>            &lt;span class="md-list-item-text"&gt;Home&lt;/span&gt;<br>          &lt;/router-link&gt;<br>        &lt;/md-list-item&gt;</span><span id="c0f6" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;md-list-item&gt;<br>          &lt;router-link to="/contact"&gt;<br>            &lt;span class="md-list-item-text"&gt;Add Contact&lt;/span&gt;<br>          &lt;/router-link&gt;<br>        &lt;/md-list-item&gt;<br>      &lt;/md-list&gt;<br>    &lt;/md-drawer&gt;</span><span id="506e" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;router-view /&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;</span><span id="92bf" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;script&gt;<br>export default {<br>  name: "app",<br>  data: () =&gt; {<br>    return {<br>      showNavigation: false<br>    };<br>  }<br>};<br>&lt;/script&gt;</span><span id="ae52" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;style lang="scss"&gt;<br>.center {<br>  text-align: center;<br>}<br>&lt;/style&gt;</span></pre>
+                <p id="d890" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">In <code class="eu jc jd je jf b">main.js</code> , we
+                    add our boilerplate code to include Vue Material and Vee Validate in our app:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="3187" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">import Vue from 'vue'<br>import App from './App.vue'<br>import router from './router'<br>import store from './store'<br>import VueMaterial from 'vue-material'<br>import 'vue-material/dist/vue-material.min.css'<br>import VeeValidate from 'vee-validate';</span><span id="71f2" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">Vue.use(VeeValidate);<br>Vue.use(VueMaterial);</span><span id="7ba3" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">Vue.config.productionTip = false</span><span id="ca0d" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">new Vue({<br>  router,<br>  store,<br>  render: h =&gt; h(App)<br>}).$mount('#app')</span></pre>
+                <p id="2f81" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">In <code class="eu jc jd je jf b">router.js</code> , we
+                    add our routes so we can see our pages:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="9373" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">import Vue from 'vue'<br>import Router from 'vue-router'<br>import HomePage from './views/HomePage.vue'<br>import ContactFormPage from './views/ContactFormPage.vue'</span><span id="8304" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">Vue.use(Router)</span><span id="f643" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">export default new Router({<br>  mode: 'history',<br>  base: process.env.BASE_URL,<br>  routes: [<br>    {<br>      path: '/',<br>      name: 'home',<br>      component: HomePage<br>    },<br>    {<br>      path: '/contact',<br>      name: 'contact',<br>      component: ContactFormPage<br>    }<br>  ]<br>})</span></pre>
+                <p id="818e" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">In <code class="eu jc jd je jf b">store.js</code> , we
+                    put:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="0d66" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">import Vue from 'vue'<br>import Vuex from 'vuex'</span><span id="6cff" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">Vue.use(Vuex)</span><span id="8393" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">export default new Vuex.Store({<br>  state: {<br>    contacts: []<br>  },<br>  mutations: {<br>    setContacts(state, payload) {<br>      state.contacts = payload;<br>    }<br>  },<br>  actions: {</span><span id="f7a4" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">}<br>})</span></pre>
+                <p id="1350" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">to store our contact in a place where all components
+                    can access. The store uses the Vuex library so that we have a <code
+                        class="eu jc jd je jf b">this.$store</code>
+                    object to call our mutation with the
+                    <code class="eu jc jd je jf b">this.$store.commit</code> function and get the latest
+                    data from the store via the <code class="eu jc jd je jf b">computed</code> property
+                    of our component object, like so:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="9e07" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">contacts() {<br>  return this.$store.state.contacts;<br>}</span></pre>
+                <p id="1a8a" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">Finally in <code class="eu jc jd je jf b">index.html</code> , we put:
+                </p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="e37a" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">&lt;!DOCTYPE html&gt;<br>&lt;html lang="en"&gt;</span><span id="78b4" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;head&gt;<br>  &lt;meta charset="utf-8"&gt;<br>  &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;<br>  &lt;meta name="viewport" content="width=device-width,initial-scale=1.0"&gt;<br>  &lt;link rel="icon" href="&lt;%= BASE_URL %&gt;favicon.ico"&gt;<br>  &lt;link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons"&gt;<br>  &lt;link rel="stylesheet" href="<a href="https://unpkg.com/vue-material/dist/vue-material.min.css" class="cq hs js jt ju jv" target="_blank" rel="noopener nofollow">https://unpkg.com/vue-material/dist/vue-material.min.css</a>"&gt;<br>  &lt;link rel="stylesheet" href="<a href="https://unpkg.com/vue-material/dist/theme/default.css" class="cq hs js jt ju jv" target="_blank" rel="noopener nofollow">https://unpkg.com/vue-material/dist/theme/default.css</a>"&gt;<br>  &lt;title&gt;Address Book App&lt;/title&gt;<br>&lt;/head&gt;</span><span id="68c7" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;body&gt;<br>  &lt;noscript&gt;<br>    &lt;strong&gt;We're sorry but vee-validate-tutorial-app doesn't work properly without JavaScript enabled. Please enable it<br>      to continue.&lt;/strong&gt;<br>  &lt;/noscript&gt;<br>  &lt;div id="app"&gt;&lt;/div&gt;<br>  &lt;!-- built files will be auto injected --&gt;<br>&lt;/body&gt;</span><span id="868b" class="eh jn jo as jf b gv jw jx jy jz ka jq r jr" data-selectable-paragraph="">&lt;/html&gt;</span></pre>
+                <p id="c419" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">to add the Roboto font and Material icons to our app.
+                </p>
+                <p id="5d5c" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">Now we are ready to start our JSON server. Go to our
+                    project folder and run <code class="eu jc jd je jf b">json-server — watch
+                        db.json</code> to start the server. It will allow us to call these routes
+                    without any configuration:</p>
+                <pre
+                    class="jg jh ji jj jk jl jm ca"><span id="1efe" class="eh jn jo as jf b gv jp jq r jr" data-selectable-paragraph="">GET    /contacts<br>POST   /contacts<br>PUT    /contacts/1<br>DELETE /contacts/1</span></pre>
+                <p id="7975" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">These are all the routes we need. Data will be saved to
+                    <code class="eu jc jd je jf b">db.json</code> of the folder that we’re in, which
+                    should our app’s project folder.</p>
+                <p id="e8d6" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph="">At the end, we have the following:</p>
+                <figure class="jg jh ji jj jk kc fg fh paragraph-image">
+                    <div class="kd ke ei kf ai">
+                        <div class="fg fh kb">
+                            <div class="kj r ei eu">
+                                <div class="kk kl r">
+                                    <div class="dh kg s t u dc ai br kh ki"><img alt="Image for post"
+                                            class="s t u dc ai km kn ap ug"
+                                            src="https://miro.medium.com/max/60/1*rZmnxeLwZnv3AYQlXq_i2w.png?q=20"
+                                            width="1361" height="627"></div><img alt="Image for post"
+                                        class="dr tw s t u dc ai c" width="1361" height="627"
+                                        src="https://miro.medium.com/max/1361/1*rZmnxeLwZnv3AYQlXq_i2w.png"
+                                        srcset="https://miro.medium.com/max/276/1*rZmnxeLwZnv3AYQlXq_i2w.png 276w, https://miro.medium.com/max/552/1*rZmnxeLwZnv3AYQlXq_i2w.png 552w, https://miro.medium.com/max/640/1*rZmnxeLwZnv3AYQlXq_i2w.png 640w, https://miro.medium.com/max/700/1*rZmnxeLwZnv3AYQlXq_i2w.png 700w"
+                                        sizes="700px"><noscript><img alt="Image for post" class="s t u dc ai"
+                                            src="https://miro.medium.com/max/2722/1*rZmnxeLwZnv3AYQlXq_i2w.png"
+                                            width="1361" height="627"
+                                            srcSet="https://miro.medium.com/max/552/1*rZmnxeLwZnv3AYQlXq_i2w.png 276w, https://miro.medium.com/max/1104/1*rZmnxeLwZnv3AYQlXq_i2w.png 552w, https://miro.medium.com/max/1280/1*rZmnxeLwZnv3AYQlXq_i2w.png 640w, https://miro.medium.com/max/1400/1*rZmnxeLwZnv3AYQlXq_i2w.png 700w"
+                                            sizes="700px" /></noscript>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </figure>
+                <figure class="jg jh ji jj jk kc fg fh paragraph-image">
+                    <div class="kd ke ei kf ai">
+                        <div class="fg fh kp">
+                            <div class="kj r ei eu">
+                                <div class="kq kl r">
+                                    <div class="dh kg s t u dc ai br kh ki"><img alt="Image for post"
+                                            class="s t u dc ai km kn ap ug"
+                                            src="https://miro.medium.com/max/60/1*o2jwvfXXYxSWGOcNmfaIlg.png?q=20"
+                                            width="1363" height="623"></div><img alt="Image for post"
+                                        class="dr tw s t u dc ai c" width="1363" height="623"
+                                        src="https://miro.medium.com/max/1363/1*o2jwvfXXYxSWGOcNmfaIlg.png"
+                                        srcset="https://miro.medium.com/max/276/1*o2jwvfXXYxSWGOcNmfaIlg.png 276w, https://miro.medium.com/max/552/1*o2jwvfXXYxSWGOcNmfaIlg.png 552w, https://miro.medium.com/max/640/1*o2jwvfXXYxSWGOcNmfaIlg.png 640w, https://miro.medium.com/max/700/1*o2jwvfXXYxSWGOcNmfaIlg.png 700w"
+                                        sizes="700px"><noscript><img alt="Image for post" class="s t u dc ai"
+                                            src="https://miro.medium.com/max/2726/1*o2jwvfXXYxSWGOcNmfaIlg.png"
+                                            width="1363" height="623"
+                                            srcSet="https://miro.medium.com/max/552/1*o2jwvfXXYxSWGOcNmfaIlg.png 276w, https://miro.medium.com/max/1104/1*o2jwvfXXYxSWGOcNmfaIlg.png 552w, https://miro.medium.com/max/1280/1*o2jwvfXXYxSWGOcNmfaIlg.png 640w, https://miro.medium.com/max/1400/1*o2jwvfXXYxSWGOcNmfaIlg.png 700w"
+                                            sizes="700px" /></noscript>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </figure>
+                <figure class="jg jh ji jj jk kc fg fh paragraph-image">
+                    <div class="kd ke ei kf ai">
+                        <div class="fg fh kp">
+                            <div class="kj r ei eu">
+                                <div class="kq kl r">
+                                    <div class="dh kg s t u dc ai br kh ki"><img alt="Image for post"
+                                            class="s t u dc ai km kn ap ug"
+                                            src="https://miro.medium.com/max/60/1*hABoMlByWXfyopfVptC80A.png?q=20"
+                                            width="1363" height="623"></div><img alt="Image for post"
+                                        class="dr tw s t u dc ai c" width="1363" height="623"
+                                        src="https://miro.medium.com/max/1363/1*hABoMlByWXfyopfVptC80A.png"
+                                        srcset="https://miro.medium.com/max/276/1*hABoMlByWXfyopfVptC80A.png 276w, https://miro.medium.com/max/552/1*hABoMlByWXfyopfVptC80A.png 552w, https://miro.medium.com/max/640/1*hABoMlByWXfyopfVptC80A.png 640w, https://miro.medium.com/max/700/1*hABoMlByWXfyopfVptC80A.png 700w"
+                                        sizes="700px"><noscript><img alt="Image for post" class="s t u dc ai"
+                                            src="https://miro.medium.com/max/2726/1*hABoMlByWXfyopfVptC80A.png"
+                                            width="1363" height="623"
+                                            srcSet="https://miro.medium.com/max/552/1*hABoMlByWXfyopfVptC80A.png 276w, https://miro.medium.com/max/1104/1*hABoMlByWXfyopfVptC80A.png 552w, https://miro.medium.com/max/1280/1*hABoMlByWXfyopfVptC80A.png 640w, https://miro.medium.com/max/1400/1*hABoMlByWXfyopfVptC80A.png 700w"
+                                            sizes="700px" /></noscript>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </figure>
+                <figure class="jg jh ji jj jk kc fg fh paragraph-image">
+                    <div class="kd ke ei kf ai">
+                        <div class="fg fh kr">
+                            <div class="kj r ei eu">
+                                <div class="ks kl r">
+                                    <div class="dr tw s t u dc ai br kh ki"><img alt="Image for post"
+                                            class="s t u dc ai km kn ko"
+                                            src="https://miro.medium.com/max/60/1*2jMc_A_r1oB_P9iLgjF1dA.png?q=20"
+                                            width="1365" height="625"></div><img alt="Image for post"
+                                        class="dh kg s t u dc ai c" width="1365" height="625"><noscript><img
+                                            alt="Image for post" class="s t u dc ai"
+                                            src="https://miro.medium.com/max/2730/1*2jMc_A_r1oB_P9iLgjF1dA.png"
+                                            width="1365" height="625"
+                                            srcSet="https://miro.medium.com/max/552/1*2jMc_A_r1oB_P9iLgjF1dA.png 276w, https://miro.medium.com/max/1104/1*2jMc_A_r1oB_P9iLgjF1dA.png 552w, https://miro.medium.com/max/1280/1*2jMc_A_r1oB_P9iLgjF1dA.png 640w, https://miro.medium.com/max/1400/1*2jMc_A_r1oB_P9iLgjF1dA.png 700w"
+                                            sizes="700px" /></noscript>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </figure>
+                <p id="ace5" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph=""><code class="eu jc jd je jf b">async</code> and <code
+                        class="eu jc jd je jf b">await</code> are great ways to chain promises. The
+                    syntax is much more convenient than chaining <code class="eu jc jd je jf b">then</code> functions.
+                    The only
+                    thing you have to worry
+                    about is when your app has to be compatible with Internet Explorer. This syntax is
+                    not available for Internet Explorer without something like Babel. See full
+                    compatibility list at <a
+                        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function"
+                        class="cq hs js jt ju jv" target="_blank"
+                        rel="noopener nofollow">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function</a>.
+                </p>
+                <p id="8a9d" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph=""><strong class="ig kt">Subscribe to my email list now at
+                    </strong><a href="http://jauyeung.net/subscribe/" class="cq hs js jt ju jv" target="_blank"
+                        rel="noopener nofollow"><strong class="ig kt">http://jauyeung.net/subscribe/</strong></a><strong
+                        class="ig kt"> to get more tutorials.</strong></p>
+                <p id="6cf4" class="ie if as ig b ih ii ij ik il im in io ip iq ir is it iu iv iw ix iy iz ja jb fm eh"
+                    data-selectable-paragraph=""><strong class="ig kt">Follow me on Twitter at
+                    </strong><a href="https://twitter.com/AuMayeung" class="cq hs js jt ju jv" target="_blank"
+                        rel="noopener nofollow"><strong class="ig kt">https://twitter.com/AuMayeung</strong></a></p>
+
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
