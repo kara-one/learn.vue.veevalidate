@@ -1,7 +1,19 @@
 {
   "name": "learn.vue.veevalidate",
   "version": "0.1.0",
+  "description": "Example project on vue-cli witn vee-validate",
   "private": true,
+  "keywords": [
+      "vue-cli",
+      "vee-validate",
+      "vue-material",
+      "vue-router",
+      "vuex",
+      "axios",
+      "json-server"
+  ],
+  "author": "Karaone <master@karaone.info>",
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
