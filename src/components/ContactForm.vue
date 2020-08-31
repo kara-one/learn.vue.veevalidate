@@ -3,15 +3,15 @@
     <div class="center">
       <h1>{{ editing ? 'Edit' : 'Add' }} Contact</h1>
     </div>
-    {{errorsAll}}
-    <ValidationObserver ref="form" v-slot="{ passes, errors }">
-      <form novalidate class="md-layout" @submit="passes(save)">
-        <md-field :class="[errors && errors.firstName && errors.firstName[0] ? 'md-invalid' : '']">
+
+    <ValidationObserver ref="form" v-slot="{ passes, errors, invalid }">
+      <form novalidate class="md-layout" @submit.prevent="passes(save)">
+        <md-field :class="{ 'md-invalid': mdInvalid(errors, 'firstName') }">
           <label for="firstName">First Name</label>
 
           <ValidationProvider
             vid="firstName"
-            rules="required"
+            rules="required|alpha"
             :bails="false"
             v-slot="{ errors, ariaMsg, ariaInput }"
           >
@@ -25,80 +25,214 @@
           </ValidationProvider>
         </md-field>
 
-        <md-field :class="[errors && errors.lastName && errors.lastName[0] ? 'md-invalid' : '']">
+        <md-field :class="{ 'md-invalid': mdInvalid(errors, 'lastName') }">
           <label for="lastName">Last Name</label>
-          <md-input name="lastName" v-model="contact.lastName" :disabled="sending" />
+
+          <ValidationProvider
+            vid="lastName"
+            rules="required|alpha"
+            :bails="false"
+            v-slot="{ errors, ariaMsg, ariaInput }"
+          >
+            <md-input
+              name="lastName"
+              v-model="contact.lastName"
+              v-bind="ariaInput"
+              :disabled="sending"
+            />
+            <span class="md-error" v-bind="ariaMsg">{{ errors[0] }}</span>
+          </ValidationProvider>
         </md-field>
 
-        <md-field :class="[errors && errors.firstName && errors.firstName[0] ? 'md-invalid' : '']">
+        <md-field :class="{ 'md-invalid': mdInvalid(errors, 'addressLineOne') }">
           <label for="addressLineOne">Address Line 1</label>
-          <md-input name="addressLineOne" v-model="contact.addressLineOne" :disabled="sending" />
+
+          <ValidationProvider
+            vid="addressLineOne"
+            rules="required"
+            :bails="false"
+            v-slot="{ errors, ariaMsg, ariaInput }"
+          >
+            <md-input
+              name="addressLineOne"
+              v-model="contact.addressLineOne"
+              v-bind="ariaInput"
+              :disabled="sending"
+            />
+            <span class="md-error" v-bind="ariaMsg">{{ errors[0] }}</span>
+          </ValidationProvider>
         </md-field>
 
-        <md-field :class="[errors && errors.firstName && errors.firstName[0] ? 'md-invalid' : '']">
+        <md-field :class="{ 'md-invalid': mdInvalid(errors, 'addressLineTwo') }">
           <label for="addressLineTwo">Address Line 2</label>
-          <md-input name="addressLineTwo" v-model="contact.addressLineTwo" :disabled="sending" />
+
+          <ValidationProvider
+            vid="addressLineTwo"
+            rules="alpha"
+            :bails="false"
+            v-slot="{ errors, ariaMsg, ariaInput }"
+          >
+            <md-input
+              name="addressLineTwo"
+              v-model="contact.addressLineTwo"
+              v-bind="ariaInput"
+              :disabled="sending"
+            />
+            <span class="md-error" v-bind="ariaMsg">{{ errors[0] }}</span>
+          </ValidationProvider>
         </md-field>
 
-        <md-field :class="[errors && errors.firstName && errors.firstName[0] ? 'md-invalid' : '']">
+        <md-field :class="{ 'md-invalid': mdInvalid(errors, 'city') }">
           <label for="city">City</label>
-          <md-input name="city" v-model="contact.city" :disabled="sending" />
+
+          <ValidationProvider
+            vid="city"
+            rules="required"
+            :bails="false"
+            v-slot="{ errors, ariaMsg, ariaInput }"
+          >
+            <md-input name="city" v-model="contact.city" v-bind="ariaInput" :disabled="sending" />
+            <span class="md-error" v-bind="ariaMsg">{{ errors[0] }}</span>
+          </ValidationProvider>
         </md-field>
 
-        <md-field :class="[errors && errors.firstName && errors.firstName[0] ? 'md-invalid' : '']">
+        <md-field :class="{ 'md-invalid': mdInvalid(errors, 'country') }">
           <label for="country">Country</label>
-          <md-select name="country" v-model="contact.country" md-dense :disabled="sending">
-            <md-option :value="c" :key="c" v-for="c in countries">
-              {{
-              c
-              }}
-            </md-option>
-          </md-select>
+
+          <ValidationProvider
+            vid="country"
+            rules="required|inCountries"
+            :bails="false"
+            v-slot="{ errors, ariaMsg, ariaInput }"
+          >
+            <md-select
+              name="country"
+              v-model="contact.country"
+              v-bind="ariaInput"
+              md-dense
+              :disabled="sending"
+            >
+              <md-option v-for="(c, index) in countries" :value="c" :key="index">{{ c }}</md-option>
+            </md-select>
+            <span class="md-error" v-bind="ariaMsg">{{ errors[0] }}</span>
+          </ValidationProvider>
         </md-field>
 
-        <md-field :class="[errors && errors.firstName && errors.firstName[0] ? 'md-invalid' : '']">
+        <md-field :class="{ 'md-invalid': mdInvalid(errors, 'postalCode') }">
           <label for="postalCode">Postal Code</label>
-          <md-input name="postalCode" v-model="contact.postalCode" :disabled="sending" />
+
+          <ValidationProvider
+            vid="postalCode"
+            :rules="{required: true, regex: getPostalCodeRegex()}"
+            :bails="false"
+            v-slot="{ errors, ariaMsg, ariaInput }"
+          >
+            <md-input
+              name="postalCode"
+              v-model="contact.postalCode"
+              v-bind="ariaInput"
+              :disabled="sending"
+            />
+            <span class="md-error" v-bind="ariaMsg">{{ errors[0] }}</span>
+          </ValidationProvider>
         </md-field>
 
-        <md-field :class="[errors && errors.firstName && errors.firstName[0] ? 'md-invalid' : '']">
+        <md-field :class="{ 'md-invalid': mdInvalid(errors, 'phone') }">
           <label for="phone">Phone</label>
-          <md-input name="phone" v-model="contact.phone" :disabled="sending" />
+
+          <ValidationProvider
+            vid="phone"
+            :rules="{required: true, regex: getPhoneRegex()}"
+            :bails="false"
+            v-slot="{ errors, ariaMsg, ariaInput }"
+          >
+            <md-input name="phone" v-model="contact.phone" v-bind="ariaInput" :disabled="sending" />
+            <span class="md-error" v-bind="ariaMsg">{{ errors[0] }}</span>
+          </ValidationProvider>
         </md-field>
 
-        <md-field :class="[errors && errors.firstName && errors.firstName[0] ? 'md-invalid' : '']">
+        <md-field :class="{ 'md-invalid': mdInvalid(errors, 'gender') }">
           <label for="gender">Gender</label>
-          <md-select name="gender" v-model="contact.gender" md-dense :disabled="sending">
-            <md-option value="male">Male</md-option>
-            <md-option value="female">Female</md-option>
-          </md-select>
+
+          <ValidationProvider
+            vid="gender"
+            rules="required"
+            :bails="false"
+            v-slot="{ errors, ariaMsg, ariaInput }"
+          >
+            <md-select
+              name="gender"
+              v-model="contact.gender"
+              v-bind="ariaInput"
+              md-dense
+              :disabled="sending"
+            >
+              <md-option value="male">Male</md-option>
+              <md-option value="female">Female</md-option>
+            </md-select>
+            <span class="md-error" v-bind="ariaMsg">{{ errors[0] }}</span>
+          </ValidationProvider>
         </md-field>
 
-        <md-field :class="[errors && errors.firstName && errors.firstName[0] ? 'md-invalid' : '']">
+        <md-field :class="{ 'md-invalid': mdInvalid(errors, 'age') }">
           <label for="age">Age</label>
-          <md-input
-            type="number"
-            id="age"
-            name="age"
-            autocomplete="age"
-            v-model="contact.age"
-            :disabled="sending"
-          />
+
+          <ValidationProvider
+            vid="age"
+            rules="required|between:0,200"
+            :bails="false"
+            v-slot="{ errors, ariaMsg, ariaInput }"
+          >
+            <md-input
+              type="number"
+              id="age"
+              name="age"
+              autocomplete="age"
+              v-model="contact.age"
+              v-bind="ariaInput"
+              :disabled="sending"
+            />
+            <span class="md-error" v-bind="ariaMsg">{{ errors[0] }}</span>
+          </ValidationProvider>
         </md-field>
 
-        <md-field :class="[errors && errors.firstName && errors.firstName[0] ? 'md-invalid' : '']">
+        <md-field :class="{ 'md-invalid': mdInvalid(errors, 'email') }">
           <label for="email">Email</label>
-          <md-input
-            type="email"
-            name="email"
-            autocomplete="email"
-            v-model="contact.email"
-            :disabled="sending"
-          />
+
+          <ValidationProvider
+            vid="email"
+            rules="required|email"
+            :bails="false"
+            v-slot="{ errors, ariaMsg, ariaInput }"
+          >
+            <md-input
+              type="email"
+              name="email"
+              autocomplete="email"
+              v-model="contact.email"
+              v-bind="ariaInput"
+              :disabled="sending"
+            />
+            <span class="md-error" v-bind="ariaMsg">{{ errors[0] }}</span>
+          </ValidationProvider>
         </md-field>
 
         <md-progress-bar md-mode="indeterminate" v-if="sending" />
-        <md-button type="submit" class="md-raised">{{ editing ? 'Edit' : 'Create' }} Contact</md-button>
+        <md-button
+          type="submit"
+          class="md-raised"
+          :disabled="invalid"
+        >{{ editing ? 'Edit' : 'Create' }} Contact</md-button>
+
+        <md-snackbar
+          :md-position="snackbar.position"
+          :md-duration="snackbar.isInfinity ? Infinity : snackbar.duration"
+          :md-active.sync="save_error"
+          md-persistent
+        >
+          <span>{{ save_error }}</span>
+          <md-button class="md-primary" @click="save_error = false">Retry</md-button>
+        </md-snackbar>
       </form>
     </ValidationObserver>
   </div>
@@ -114,9 +248,19 @@ import {
 } from 'vee-validate';
 import en from 'vee-validate/dist/locale/en.json';
 import * as rules from 'vee-validate/dist/rules';
+import { messages } from 'vee-validate/dist/locale/en.json';
 
 Object.keys(rules).forEach((rule) => {
-  extend(rule, rules[rule]);
+  extend(rule, {...rules[rule], message: messages[rule]});
+});
+
+extend('inCountries', (value) => {
+  const check = COUNTRIES.some(el => {
+    if(el.name.indexOf(value) !== -1) {
+      return true;
+    }
+  });
+  return check || 'Select one from list';
 });
 
 localize('en', en);
@@ -128,6 +272,19 @@ export default {
     ValidationProvider,
   },
   mixins: [contactMixin],
+  data() {
+    return {
+      sending: false,
+      save_error: false,
+      contact: {},
+      countries: COUNTRIES.map((c) => c.name),
+      snackbar: {
+        position: 'center',
+        duration: 4000,
+        isInfinity: false
+      }
+    };
+  },
   props: {
     editing: Boolean,
     contactId: Number,
@@ -139,29 +296,17 @@ export default {
     contacts() {
       return this.$store.state.contacts;
     },
-    errorsAll() {
-      //return false;
-      return this.$refs.form;
-    },
-  },
-  data() {
-    return {
-      sending: false,
-      contact: {},
-      countries: COUNTRIES.map((c) => c.name),
-    };
   },
   beforeMount() {
     this.contact = this.contacts.find((c) => c.id == this.contactId) || {};
   },
   methods: {
-    async save(evt) {
-      evt.preventDefault();
-
-      await this.$refs.form.validate().then(success => {
-        if (!success) {
-          return;
-        }
+    async save() {
+      this.sending = true;
+      const success = await this.$refs.form.validate();
+      if (!success) {
+        return;
+      }
 
       try {
         if (this.editing) {
@@ -173,10 +318,12 @@ export default {
           await this.getAllContacts();
           this.$router.push('/');
         }
+        this.sending = false;
       } catch (ex) {
+        console.log('-----error-------');
         console.log(ex);
+        this.save_error = ex;
       }
-      });
     },
     async getAllContacts() {
       try {
@@ -198,7 +345,15 @@ export default {
       if (['United States', 'Canada'].includes(this.contact.country)) {
         return /^[2-9]\d{2}[2-9]\d{2}\d{4}$/;
       }
+      if (['Ukraine'].includes(this.contact.country)) {
+        return /^[0-9]{9}$/;
+      }
       return /./;
+    },
+    mdInvalid(errors, field) {
+      const has = Object.prototype.hasOwnProperty;
+
+      return has.call(errors, field) && has.call(errors[field], 0);
     },
   },
 };
