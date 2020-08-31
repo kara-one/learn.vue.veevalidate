@@ -1,19 +1,31 @@
 {
-  "posts": [
+  "contacts": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "firstName": "json-server",
+      "lastName": "typicode1",
+      "addressLineOne": "typicode",
+      "addressLineTwo": "typicode",
+      "city": "typicode",
+      "country": "1",
+      "postalCode": "11111",
+      "gender": "typicode",
+      "age": "11",
+      "email": "typicode@wqwqw.wq"
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "firstName": "Test",
+      "addressLineOne": "Wssasas  as asa sas as ",
+      "city": "Kiev",
+      "postalCode": "2121212",
+      "phone": "22121212121212",
+      "email": "wqwqwq@wqwqwq.ru",
+      "lastName": "Weeee",
+      "country": "Algeria",
+      "gender": "male",
+      "age": "21",
+      "addressLineTwo": "wqwqwqw",
+      "id": 2
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
